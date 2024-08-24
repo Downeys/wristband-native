@@ -17,7 +17,6 @@ export const Track = ({ playerStatus, trackIndex, trackInFocus, trackInPlayer, p
     const { updateTrackInFocus } = usePlayerContext();
     const isInPlayer = trackInPlayer === trackIndex;
     const isInFocus = trackInFocus === trackIndex;
-    const playButtonVisible = (isInPlayer && playerStatus === PlayerStatus.playing) || isInFocus;
     const playButtonStatus = isInPlayer ? playerStatus : PlayerStatus.paused;
 
     return (
@@ -32,8 +31,8 @@ export const Track = ({ playerStatus, trackIndex, trackInFocus, trackInPlayer, p
                         <Text className='font-secondary text-white'>{trackName}</Text>
                     </View>
                 </View>
-                {playButtonVisible && <View className='flex justify-center content-center'>
-                    <PlayButton variant='track' status={playButtonStatus} />
+                {isInFocus && <View className='flex justify-center content-center'>
+                    <PlayButton variant='track' status={playButtonStatus} trackIndex={trackIndex} />
                 </View>}
             </View>
         </Pressable>

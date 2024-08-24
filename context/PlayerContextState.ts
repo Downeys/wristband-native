@@ -10,4 +10,5 @@ export interface PlayerContextState {
     back: () => void;
     next: () => void;
     updateTrackInFocus: (index: number) => void;
+    handlePlayClick: (index: number) => void;
 }

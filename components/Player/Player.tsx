@@ -15,7 +15,7 @@ export const Player = () => {
             </View>
             <View className='flex flex-row justify-center items-center p-2'>
                 <BackButton onPress={back} />
-                <PlayButton status={playerStatus} />
+                <PlayButton status={playerStatus} trackIndex={playingIndex} />
                 <NextButton onPress={next} />
             </View>
         </View>

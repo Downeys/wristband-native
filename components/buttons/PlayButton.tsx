@@ -1,15 +1,16 @@
-import React, { useMemo } from 'react'
-import { View } from 'react-native'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import { PlayerStatus } from '../../types/PlayerStatus.enum';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { colors } from '../../constants';
 import styles from '../../styles/styles';
+import { usePlayerContext } from '../../context/PlayerContextProvider';
 
 export interface PlayButtonProps {
     variant?: 'primary' | 'track';
     status: PlayerStatus;
     loading?: boolean;
-    onClick?: (trackId: string, status: 'playing' | 'paused') => void;
+    trackIndex: number;
 }
 
 const Config = {
@@ -25,13 +26,17 @@ const Config = {
     }
 }
 
-export const PlayButton = ({ variant, status, loading, onClick }: PlayButtonProps) => {
+export const PlayButton = ({ variant, status, trackIndex, loading }: PlayButtonProps) => {
+    const { handlePlayClick, playingIndex } = usePlayerContext();
     const styleVariant = variant ?? 'primary';
     const isPlaying = useMemo(() => status === PlayerStatus.playing, [status]);
+    const handlePress = useCallback(() => handlePlayClick(trackIndex), [trackIndex, handlePlayClick]);
 
     return (
-        <View className={`flex flex-row items-center justify-center ${Config[styleVariant].style} ${isPlaying ? 'pl-1' : ''}`} style={styleVariant === 'primary' ? styles.shadowBlue : {}}>
-            <Ionicons name={isPlaying ? 'pause' : 'play'} color={Config[styleVariant].iconColor} size={Config[styleVariant].iconSize} onPress={() => {}} />
-        </View>
+        <TouchableOpacity onPress={handlePress} >
+            <View className={`z-0 flex flex-row items-center justify-center ${Config[styleVariant].style} ${isPlaying ? 'pl-1' : ''}`} style={styleVariant === 'primary' ? styles.shadowBlue : {}}>
+                <Ionicons name={isPlaying ? 'pause' : 'play'} color={Config[styleVariant].iconColor} size={Config[styleVariant].iconSize} />
+            </View>
+        </TouchableOpacity>
     )
 }
