@@ -1,5 +1,6 @@
 export const tracks = [
     {
+        "id": "1",
         "bandName": "Saturday Night Soldiers",
         "trackName": "Apt 8",
         "albumName": "Surviving the Night",
@@ -9,6 +10,7 @@ export const tracks = [
         "position": 1
     },
     {
+        "id": "2",
         "bandName": "Saturday Night Soldiers",
         "trackName": "Creole Funeral",
         "albumName": "Surviving the Night",
@@ -18,6 +20,7 @@ export const tracks = [
         "position": 2
     },
     {
+        "id": "3",
         "bandName": "Yetisburg",
         "trackName": "Come Up Away",
         "albumName": "EP",
@@ -27,6 +30,7 @@ export const tracks = [
         "position": 3
     },
     {
+        "id": "4",
         "bandName": "Yetisburg",
         "trackName": "We Are the Egg",
         "albumName": "EP",
@@ -36,6 +40,7 @@ export const tracks = [
         "position": 4
     },
     {
+        "id": "5",
         "bandName": "Saturday Night Soldiers",
         "trackName": "Christopher Walken (Home)",
         "albumName": "Alpacabowl EP",
@@ -45,6 +50,7 @@ export const tracks = [
         "position": 5
     },
     {
+        "id": "6",
         "bandName": "Saturday Night Soldiers",
         "trackName": "Waste",
         "albumName": "Surviving the Night",
@@ -54,6 +60,7 @@ export const tracks = [
         "position": 6
     },
     {
+        "id": "7",
         "bandName": "Yetisburg",
         "trackName": "Souls Coals",
         "albumName": "EP",

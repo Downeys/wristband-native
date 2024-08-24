@@ -31,7 +31,7 @@ export const PlayButton = ({ variant, status, loading, onClick }: PlayButtonProp
 
     return (
         <View className={`flex flex-row items-center justify-center ${Config[styleVariant].style} ${isPlaying ? 'pl-1' : ''}`} style={styleVariant === 'primary' ? styles.shadowBlue : {}}>
-            <Ionicons name={isPlaying ? 'play' : 'pause'} color={Config[styleVariant].iconColor} size={Config[styleVariant].iconSize} onPress={() => {}} />
+            <Ionicons name={isPlaying ? 'pause' : 'play'} color={Config[styleVariant].iconColor} size={Config[styleVariant].iconSize} onPress={() => {}} />
         </View>
     )
 }
