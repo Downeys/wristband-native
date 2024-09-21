@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { createContext, useState, useMemo, useCallback } from "react";
-import { PlayerStatus } from "../types/PlayerStatus.enum";
-import { TrackData } from "../types/types";
+import { PlayerStatus } from "../../types/PlayerStatus.enum";
+import { TrackData } from "../../types/types";
 import { InitialPlayerState } from "./InitialPlayerState";
 import { PlayerContextState } from "./PlayerContextState";
 import { Audio } from 'expo-av';
-import { createAudioSound, togglePlayPause } from '../utils/AudioHelpers';
+import { createAudioSound, togglePlayPause } from '../../utils/AudioHelpers';
 
 interface PlayListProviderProps {
     playList: TrackData[]

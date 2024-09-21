@@ -1,7 +1,7 @@
 import React from "react"
 import { FlatList } from "react-native";
 import Track from "../Track/Track";
-import { usePlayerContext } from "../../context/PlayerContextProvider";
+import { usePlayerContext } from "../../context/PlayerContext/PlayerContextProvider";
 
 export const TrackList = () => {
     const { playlist, playerStatus, playingIndex, focusedIndex } = usePlayerContext();

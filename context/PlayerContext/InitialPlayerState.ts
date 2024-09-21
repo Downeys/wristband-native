@@ -1,5 +1,5 @@
-import { PlayerStatus } from "../types/PlayerStatus.enum";
-import { TrackData } from "../types/types";
+import { PlayerStatus } from "../../types/PlayerStatus.enum";
+import { TrackData } from "../../types/types";
 import { PlayerContextState } from "./PlayerContextState";
 
 export const InitialPlayerState: PlayerContextState = {
@@ -10,5 +10,6 @@ export const InitialPlayerState: PlayerContextState = {
     focusedIndex: 0,
     back: () => {},
     next: () => {},
-    updateTrackInFocus: (index: number) => {}
+    updateTrackInFocus: (index: number) => {},
+    handlePlayClick: (index: number) => {}
 }

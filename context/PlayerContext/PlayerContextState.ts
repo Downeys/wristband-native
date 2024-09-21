@@ -1,5 +1,5 @@
-import { PlayerStatus } from "../types/PlayerStatus.enum";
-import { TrackData } from "../types/types";
+import { PlayerStatus } from "../../types/PlayerStatus.enum";
+import { TrackData } from "../../types/types";
 
 export interface PlayerContextState {
     playlist: TrackData[];

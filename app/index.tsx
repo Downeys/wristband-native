@@ -1,23 +1,29 @@
 import React from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { View } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BackButton from '../components/buttons/BackButton';
 import Player from '../components/Player/Player';
-import Track from '../components/Track/Track';
 import { colors } from '../constants';
-import styles from '../styles/styles';
-import PlayListProvider from '../context/PlayerContextProvider';
-import tracks from '../mock-data/tracks';
+import PlayListProvider from '../context/PlayerContext/PlayerContextProvider';
 import { TrackData } from '../types/types';
-import { PlayerStatus } from '../types/PlayerStatus.enum';
 import TrackList from '../components/TrackList/TrackList';
+import { Track } from '../models/Track';
+import { useQuery } from '@realm/react';
+
 
 export const Home = () => {
-    const data: TrackData[] = tracks;
+    const data = useQuery<Track>('track');
+    const tracks: TrackData[] = data.map(record => ({
+        id: `${record._id}`,
+        trackName: record.trackName,
+        bandName: record.bandName,
+        audioSrc: record.audioSrc,
+        picSrc: record.picSrc,
+        buyLink:  record.buyLink
+    }))
     return (
         <SafeAreaView className='bg-slate-950 h-screen w-screen flex-1'>
-            <PlayListProvider props={{ playList: data }}>
+            <PlayListProvider props={{ playList: tracks }}>
                 <View className='mb-44 px-2'>
                     <TrackList />
                 </View>

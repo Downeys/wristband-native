@@ -4,7 +4,7 @@ import { PlayerStatus } from '../../types/PlayerStatus.enum';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { colors } from '../../constants';
 import styles from '../../styles/styles';
-import { usePlayerContext } from '../../context/PlayerContextProvider';
+import { usePlayerContext } from '../../context/PlayerContext/PlayerContextProvider';
 
 export interface PlayButtonProps {
     variant?: 'primary' | 'track';

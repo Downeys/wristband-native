@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, Image, Text, Pressable } from 'react-native'
-import { images } from '../../constants'
 import { PlayButton } from '../buttons/PlayButton'
 import { PlayerStatus } from '../../types/PlayerStatus.enum'
 import { TrackData } from '../../types/types'
-import { usePlayerContext } from '../../context/PlayerContextProvider'
+import { usePlayerContext } from '../../context/PlayerContext/PlayerContextProvider'
 
 interface TrackProps extends TrackData {
     playerStatus: PlayerStatus;
