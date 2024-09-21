@@ -3,7 +3,7 @@ import { View, Text} from 'react-native'
 import BackButton from '../buttons/BackButton';
 import { PlayButton } from '../buttons/PlayButton';
 import NextButton from '../buttons/NextButton';
-import { usePlayerContext } from '../../context/PlayerContextProvider';
+import { usePlayerContext } from '../../context/PlayerContext/PlayerContextProvider';
 
 export const Player = () => {
     const { trackInPlayer, playerStatus, playingIndex, back, next } = usePlayerContext();
