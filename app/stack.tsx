@@ -47,7 +47,11 @@ export const StackComponent = () => {
                         backgroundColor: colors.wbSlate
                     },
                     headerTintColor: colors.wbWhite,
-                    headerRight: () => (<FontAwesome.Button name='question-circle' backgroundColor={colors.wbSlate} onPress={() => router.push('/contact')} />)
+                    headerRight: () => (
+                    <View className='flex flex-row items-center'>
+                        <FontAwesome.Button name='upload' backgroundColor={colors.wbSlate} onPress={() => router.push('/submit')} />
+                        <FontAwesome.Button name='question-circle' backgroundColor={colors.wbSlate} onPress={() => router.push('/contact')} />
+                    </View>)
                     }
                 }
             >
@@ -57,6 +61,14 @@ export const StackComponent = () => {
                     headerTitle: () => (
                         <View className='flex flex-row h-20 items-center'>
                             <Text className='font-primary text-xl text-white'>Help/Feedback</Text>
+                        </View>),
+                    headerRight: () => (<Text></Text>)
+                }}/>
+                <Stack.Screen name="submit" options={{
+                    title: 'Submit Music',
+                    headerTitle: () => (
+                        <View className='flex flex-row h-20 items-center'>
+                            <Text className='font-primary text-xl text-white'>Submit Music</Text>
                         </View>),
                     headerRight: () => (<Text></Text>)
                 }}/>
