@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Stack, router } from 'expo-router'
 import { View, Image, Text, ActivityIndicator } from 'react-native'
-import { images, colors } from '../constants'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { RealmProvider, useApp } from '@realm/react';
 import { Credentials, OpenRealmBehaviorType } from 'realm';
+import images from '../content/common/constants/images';
+import colors from '../content/common/constants/colors';
 
 export const StackComponent = () => {
     const app = useApp();

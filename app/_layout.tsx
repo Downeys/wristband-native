@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SplashScreen } from 'expo-router'
 import { useFonts } from "expo-font";
 import { AppProvider, UserProvider } from '@realm/react';
 import { StackComponent } from './stack';
-import RealmContextProvider from '../context/RealmContext/RealmContextProvider';
-import { Login } from '../components/Login/Login';
+import { Login } from '../content/common/components/Login/Login';
+import { RealmContextProvider } from '../content/common/context/RealmContext/RealmContextProvider';
 
 export const RootLayout = () => {
     const [fontsLoaded, error] = useFonts({
