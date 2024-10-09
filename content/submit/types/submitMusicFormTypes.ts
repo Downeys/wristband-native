@@ -18,7 +18,8 @@ export interface SubmitState {
     contact: string;
     email: string;
     phone: string;
-    albums: Album[];
+    imageFiles: File[];
+    audioFiles: File[];
     validationMessages: string[];
     inProgress: boolean;
     showConfirmationModal: boolean;
