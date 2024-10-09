@@ -1,77 +1,97 @@
 import React, { useCallback, useState } from 'react'
 import { StatusBar } from "expo-status-bar";
-import { NativeSyntheticEvent, TextInputChangeEventData, SafeAreaView, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { SafeAreaView, View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import { FieldNames } from './constants/submitFormConstants';
-import AlbumInput from './components/AlbumInput/AlbumInput';
-import SongInput from './components/SongInput/SongInput';
 import colors from '../common/constants/colors';
 import styles from '../common/styles/styles';
-
-interface SubmitState {
-    name: string;
-    email: string;
-    phone: string;
-    message: string;
-    validationMessages: string[];
-    inProgress: boolean;
-}
+import { FormInput } from '../common/components/formElements/FormInput';
+import { SubmitState } from './types/submitMusicFormTypes';
+import FileInput from './components/FileInput/FileInput';
 
 const initState: SubmitState = {
-    name: '',
+    band: '',
+    contact: '',
     email: '',
     phone: '',
-    message: '',
+    imageFiles: [],
+    audioFiles: [],
+    validationMessages: [],
     inProgress: false,
-    validationMessages: []
+    showConfirmationModal: false,
+    showFailureModal: false
 }
 
 export const SubmitPage = () => {
     const [state, setState] = useState(initState);
-    const { BAND, CONTACT, EMAIL, PHONE, ALBUM, SONG } = FieldNames;
-    const handleFormChange = useCallback((e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        console.log(`${e.nativeEvent.text}`)
+    const { BAND, CONTACT, EMAIL, PHONE } = FieldNames;
+
+    const handleInputChange = useCallback((name: string, text: string, id?: string) => {
+        switch (name) {
+            case BAND:
+                setState({ ...state, band: text })
+                break;
+            case CONTACT:
+                setState({ ...state, contact: text })
+                break;
+            case EMAIL:
+                setState({ ...state, email: text })
+                break;
+            case PHONE:
+                setState({ ...state, phone: text })
+                break;
+            default:
+                console.log("Something went wrong")
+        }
+    }, [state]);
+
+    const handleFilesAdded = useCallback((imageFiles: File[], audioFiles: File[]) => {
+        const updatedImageFiles = [...state.imageFiles, ...imageFiles];
+        const updatedAudioFiles = [...state.audioFiles, ...audioFiles];
+        setState({ ...state, imageFiles: updatedImageFiles, audioFiles: updatedAudioFiles});
+    }, [state]);
+
+    const handleFileRemoved = useCallback((fileName: string) => {
+        const updatedImageFiles = state.imageFiles.filter(file => file.name !== fileName);
+        const updatedAudioFiles = state.audioFiles.filter(file => file.name !== fileName);
+        setState({ ...state, imageFiles: updatedImageFiles, audioFiles: updatedAudioFiles });
     }, [state])
+
+    const handleSubmit = async ()=> {
+        const url = 'UPDATE ME';
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "multipart/form-data",
+            }
+        })
+        .then(async res => {
+            if (res.status !== 204) {
+                const data = await res.json()
+                if (!res.ok) return Promise.reject({ message: `${res.status}: ${data.message}` })
+                return data
+            }
+        })
+    }
+
     return (
         <SafeAreaView className='bg-slate-950 h-screen w-screen flex-1'>
-            <View className='px-12 w-full'>
-                <Text className='text-white text-lg font-secondaryBold mb-2 w-full text-center'>Submit music here.</Text>
-                <TextInput
-                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
-                    textContentType='name'
-                    placeholder='Band/Artist Name'
-                    placeholderTextColor={colors.wbWhite}
-                    onChange={handleFormChange}
-                />
-                <TextInput
-                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
-                    textContentType='name'
-                    placeholder='Contact Person Name'
-                    placeholderTextColor={colors.wbWhite}
-                    onChange={handleFormChange}
-                />
-                <TextInput
-                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
-                    textContentType='emailAddress'
-                    placeholder='Contact Email'
-                    placeholderTextColor={colors.wbWhite}
-                    onChange={handleFormChange}
-                />
-                <TextInput
-                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
-                    textContentType='telephoneNumber'
-                    placeholder='Phone Number (optional)'
-                    placeholderTextColor={colors.wbWhite}
-                    onChange={handleFormChange}
-                />
-                <AlbumInput>
-                    <SongInput />
-                </AlbumInput>
-                <View className='w-full flex justify-center items-center'>
-                    <TouchableOpacity className='flex justify-center items-center border-2 border-wbPink rounded-2xl px-2 py-3 w-1/2' style={styles.shadowPink}>
-                        <Text className='text-2xl text-white font-primary'>Submit</Text>
-                    </TouchableOpacity>
+            <ScrollView>
+                <View className='px-12 w-full'>
+                    <Text className='text-white text-lg font-secondaryBold mb-2 w-full text-center'>Submit music here.</Text>
+                    <FormInput name={BAND} label="Band/Artist Name" onChange={handleInputChange} value={state.band} />
+                    <FormInput name={CONTACT} label="Contact Person Name" onChange={handleInputChange} value={state.contact} />
+                    <FormInput name={EMAIL} label="Contact Email" type='emailAddress' onChange={handleInputChange} value={state.email} />
+                    <FormInput name={PHONE} label="Phone Number (optional)" type='telephoneNumber' onChange={handleInputChange} value={state.phone} />
+                    <FileInput imageFiles={state.imageFiles} audioFiles={state.audioFiles} onFilesAdded={handleFilesAdded} onFileRemoved={handleFileRemoved} />
+                    <View className='w-full flex justify-center items-center mt-4'>
+                        <TouchableOpacity className='flex justify-center items-center border-2 border-wbBlue rounded-2xl px-2 py-3 w-1/2' style={styles.shadowBlue}>
+                            <Text className='text-2xl text-white font-primary'>Submit</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
             <StatusBar backgroundColor={colors.wbSlate} style='light' />
         </SafeAreaView>
     )

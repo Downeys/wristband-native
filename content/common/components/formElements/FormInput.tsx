@@ -17,7 +17,7 @@ export const FormInput = ({ label, type, name, value, onChange }: FormInputProps
     const inputType = type ?? 'none';
     return (
         <TextInput
-            className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-2 border-white rounded-lg mb-4'
+            className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
             textContentType={inputType}
             placeholder={label}
             placeholderTextColor={colors.wbWhite}

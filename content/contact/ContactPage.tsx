@@ -91,7 +91,7 @@ export const ContactPage = () => {
                 <FormInput name={EMAIL} type="emailAddress" label="Email" onChange={handleInputChange} value={state.email} />
                 <FormInput name={PHONE} type="telephoneNumber" label="Phone Number (optional)" onChange={handleInputChange} value={state.phone} />
                 <TextInput
-                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-2 border-white rounded-lg mb-4'
+                    className='text-lg font-secondary outline-none focus:outline-none w-full p-2 border-none rounded-lg mb-4 bg-slate-900'
                     multiline
                     numberOfLines={10}
                     placeholderTextColor={colors.wbWhite}
